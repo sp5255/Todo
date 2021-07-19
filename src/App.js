@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from './logo.svg';
+import React, { Component } from "react";
+import EnterTodo from "./Components/EnterTodo";
+import ShowTodo from "./Components/ShowTodo";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    let todoList = JSON.parse(localStorage.getItem("todos"));
+    if (todoList) {
+    } else {
+      todoList = [];
+    }
+    this.state = {
+      todos: todoList,
+    };
+  }
+
+  componentDidMount() {
+    let List = JSON.parse(localStorage.getItem("todos"));
+    if (List) {
+      this.setState({ todos: List });
+    } else {
+      List = [];
+      localStorage.setItem("todos", List);
+    }
+  }
+
+  recTask(task) {
+    let { todos } = this.state;
+    let List = {
+      todo:task,
+      isCompleted:false,
+      isDeleted:false
+    }
+    todos.push(List);
+    this.setState({ todos: todos });
+  }
+
+  render() {
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+    const todoList = JSON.parse(localStorage.getItem("todos"));    
+    return (
+      <div>
+        <EnterTodo recData={(task) => this.recTask(task)} />
+        <ShowTodo List={todoList} />
+      </div>
+    );
+  }
 }
-
 export default App;
