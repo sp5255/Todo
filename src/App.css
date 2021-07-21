@@ -1,38 +1,105 @@
-.App {
-  text-align: center;
+*{
+  margin: 0%;
+  box-sizing: border-box;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+*::-webkit-scrollbar {
+  display: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #314747;
+  color: white;
+  width: 100vw;
+  position: fixed;  
+  top: 0em;
+  padding: 1em;
+  font-size: large;
+  font-weight: 600;
+  filter: drop-shadow(2px 2px 3px black);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.completed{
+  color: red;  
+  text-decoration: line-through;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.enterTask{  
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+  margin-top: 5em;
+}
+
+.enterTask > input{
+width: 50%;
+background: rgb(235, 235, 236);
+border-radius: 0.2em;
+outline: none;
+border: none;
+padding: 0.5em;
+}
+
+.todoList{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-column-gap: 1vw;
+  grid-row-gap: 2vh;
+  margin: 1vw;
+}
+
+.task{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;    
+
+  background: #20a2a5;
   color: white;
+  line-height: 1.6em;
+  font-size: large;
+  height: 7em;
+  padding: 1em;
+  border-radius: 1em;
+  overflow-y: scroll;
+  word-break: break-all;
 }
 
-.App-link {
-  color: #61dafb;
+.task::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Hide scrollbar for IE, Edge and Firefox */
+.task {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.buttons{
+  display: flex;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.footer{
+  background: #304254;
+  color: white;
+  display: grid;
+  place-items: center;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+  border-radius: 0.5em;
+}
+.footer > label > span{
+  color: red;
+}
+
+@media all and (max-width:700px){
+  .todoList{
+    grid-template-columns:repeat(2,1fr)
   }
-  to {
-    transform: rotate(360deg);
-  }
+  
 }

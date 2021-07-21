@@ -1,7 +1,9 @@
 //import logo from './logo.svg';
 import React, { Component } from "react";
+import Header from "./Components/Header";
 import EnterTodo from "./Components/EnterTodo";
 import ShowTodo from "./Components/ShowTodo";
+import Footer from "./Components/Footer";
 import "./App.css";
 
 class App extends Component {
@@ -30,21 +32,33 @@ class App extends Component {
   recTask(task) {
     let { todos } = this.state;
     let List = {
-      todo:task,
-      isCompleted:false,
-      isDeleted:false
-    }
+      todo: task,
+      isCompleted: false,
+      isDeleted: false,
+    };
     todos.push(List);
     this.setState({ todos: todos });
   }
 
+  updateList(newTodos) {
+    this.setState({
+      todos: newTodos,
+    });
+  }
+
   render() {
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
-    const todoList = JSON.parse(localStorage.getItem("todos"));    
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));    
+    const todoList = this.state.todos;
+
     return (
-      <div>
+      <div className="app">
+        <Header />
         <EnterTodo recData={(task) => this.recTask(task)} />
-        <ShowTodo List={todoList} />
+        <ShowTodo
+          List={todoList}
+          newList={(newTodos) => this.updateList(newTodos)}
+        />
+        <Footer />
       </div>
     );
   }

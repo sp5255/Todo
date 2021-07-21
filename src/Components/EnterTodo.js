@@ -17,7 +17,13 @@ class EnterTodo extends Component {
   }
 
   checkKeycode(e) {
-    if (e.keyCode === 13) {      
+    if (e.keyCode === 13) {
+      //console.log(e.target.value.trim().length === 0);
+      if (e.target.value.trim().length === 0) {
+        alert("invalid task Please Enter some Task ");
+        return;
+      }
+
       this.sendData(this.state.task);
       this.setState({ task: "" });
     }
@@ -26,7 +32,7 @@ class EnterTodo extends Component {
   render() {
     const task = this.state.task;
     return (
-      <div>
+      <div className="enterTask">
         <input
           type="text"
           placeholder="Enter your Tasks here"
